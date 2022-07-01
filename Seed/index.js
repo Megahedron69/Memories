@@ -1,15 +1,14 @@
-equire("dotenv").config({ path: "../config.env" });
+require("dotenv").config({ path: "../config.env" });
 const mongoose = require("mongoose");
 const MemoModel = require("../Models/Memoriesmodel");
 const countryarr = ["India", "Canada", "Mexico"];
 const axios = require("axios");
-const CreateMemoriesdb = async () => {
+const CreateMemoriesdb = () => {
   try {
-    await mongoose.connect(`${process.env.MONGO_URI}`, {
+    mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
-      useFindAndModify: true,
+      dbName: "Memories",
       useUnifiedTopology: true,
-      useCreateIndex: true,
     });
     console.log("Database Connected");
   } catch {
