@@ -25,9 +25,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-const CreateMemoriesdb = async () => {
+const CreateMemoriesdb = () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/Memories");
+    mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      dbName: "Memories",
+      useUnifiedTopology: true,
+    });
     console.log("Database Connected");
   } catch {
     console.log("Failed to connect to database");
